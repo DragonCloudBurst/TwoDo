@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OKvrYWK7mFE=",
+  "dgSpecHash": "QTQb59FvbI0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Kat\\RiderProjects\\TwoDo\\TwoDoTEST\\TwoDoTEST.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Kat\\.nuget\\packages\\spectre.console\\0.51.2-preview.0.3\\spectre.console.0.51.2-preview.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

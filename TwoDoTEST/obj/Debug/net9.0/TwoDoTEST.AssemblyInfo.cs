@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TwoDoTEST")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+680818c444d4432e771b4cd4aaa45e78263f1aab")]
 [assembly: System.Reflection.AssemblyProductAttribute("TwoDoTEST")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TwoDoTEST")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

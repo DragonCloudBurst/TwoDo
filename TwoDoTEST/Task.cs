@@ -1,46 +1,47 @@
+using System;
+using System.Collections.Generic;
 using Spectre.Console;
 
 public class Task
 {
-    public string taskText { get; set; }
-    public int taskNum { get; set; }
-    public List<string>? taskNotes { get; set; }
+	public string taskText { get; set; }
+	public int taskNum { get; set; }
+	public List<string>? taskNotes { get; set; }
 
-    static int maxWidth = 55;
+	static int maxWidth = 55;
 
-    public Task(string text, int num)
-    {
-        this.taskText = text;
-	this.taskNum = num;
-	this.taskNotes = null;
-    }
-
-    public string displayText()
-    {
-	int strLen = this.taskText.Length;
-	int spacesNeeded = maxWidth - strLen;
-	double spacesNeededHalf = spacesNeeded / 2;
-	int spacesNeededLeftSide = 0;
-	int spacesNeededRightSide = 0;
-
-        
-	if ((spacesNeeded / 2) % 2 != 0)
+	public Task(string text, int num)
 	{
-	    // if the number needed is odd or not an integer
-            spacesNeededLeftSide = (int)(Math.Floor(spacesNeededHalf));
-	    spacesNeededRightSide = (int)(spacesNeededHalf + 1);
-	}
-	else
-	{
-	    // if the number needed is an even integer
-	    spacesNeededLeftSide = (int)(spacesNeededHalf);
-	    spacesNeededRightSide = (int)(spacesNeededHalf);
+		this.taskText = text;
+		this.taskNum = num;
+		this.taskNotes = null;
 	}
 
-	string leftSpaces = new string(' ', spacesNeededLeftSide);
-	string rightSpaces = new string(' ', spacesNeededRightSide);
+	public string displayText()
+	{
+		int strLen = this.taskText.Length;
+		int spacesNeeded = maxWidth - strLen;
+		double spacesNeededHalf = spacesNeeded / 2;
+		int spacesNeededLeftSide = 0;
+		int spacesNeededRightSide = 0;
 
-	return $"[fuchsia]│[/][grey89]☼ {leftSpaces}{this.taskText}[/]{rightSpaces}[fuchsia]│[/]";
-    }
 
+		if ((spacesNeeded / 2) % 2 != 0)
+		{
+			// if the number needed is odd or not an integer
+			spacesNeededLeftSide = (int)(Math.Floor(spacesNeededHalf));
+			spacesNeededRightSide = (int)(spacesNeededHalf + 1);
+		}
+		else
+		{
+			// if the number needed is an even integer
+			spacesNeededLeftSide = (int)(spacesNeededHalf);
+			spacesNeededRightSide = (int)(spacesNeededHalf);
+		}
+
+		string leftSpaces = new string(' ', spacesNeededLeftSide);
+		string rightSpaces = new string(' ', spacesNeededRightSide);
+
+		return $"[fuchsia]│[/][grey89]☼ {leftSpaces}{this.taskText}[/]{rightSpaces}[fuchsia]│[/]";
+	}
 }

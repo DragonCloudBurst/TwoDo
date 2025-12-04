@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using System.Collections;
+using Spectre.Console;
 using System.IO;
 using TwoDoTEST;
 
@@ -6,7 +7,7 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-	    
+	    var tasks = getTasks();
 	    
 		 printStartMenu();
 
@@ -14,7 +15,30 @@ public static class Program
 
 		 if (userChoice == "task")
 		 {
+			 AnsiConsole.MarkupLine("[fuchsia]Enter task text:[/]    ");
+
+			 bool isTaskValid = false;
+			 string taskText = "";
+			 while (!isTaskValid)
+			 {
+				 taskText = Console.ReadLine();
+
+				 if (string.IsNullOrEmpty(taskText))
+				 {
+					 isTaskValid = false;
+				 }
+				 else
+				 {
+					 isTaskValid = true;
+				 }
+			 }
 			 
+			 // calc next task num here
+
+			 int numOfTasks = getNumOfTasks();
+			 int nextTaskNum = numOfTasks + 1;
+			 
+			 tasks.addTask(new Task(taskText, nextTaskNum));
 		 }
 		 else if (userChoice == "new")
 		 {
@@ -43,9 +67,17 @@ public static class Program
 	    AnsiConsole.MarkupLine("[fuchsia]╰[/]                [fuchsia]₊˚ ✧ ━━━━⊱⋆⊰━━━━ ✧ ₊˚[/]                [fuchsia]╯[/]");  
     }
 
-    public static void printTasks()
+    public static void printTasks(TaskTree treeTasks)
     {
-	    
+	    int numOfTasks = treeTasks.getTaskCount();
+
+	    var tasksEnum = treeTasks.tasksSet.GetEnumerator();
+
+	    for (int i = 0; i < numOfTasks; i++)
+	    {
+		    AnsiConsole.MarkupLine($"[fuchsia]│[/]   [grey89]☼ {tasksEnum.Current.taskNum}. {tasksEnum.Current.taskText}[/]");
+		    tasksEnum.MoveNext();
+	    }
     }
 
     public static TaskTree getTasks()
@@ -57,13 +89,20 @@ public static class Program
 
 	    foreach (var task in tasksData)
 	    {
-		    int taskNum = int.Parse(task.Substring(0,task.IndexOf(".")));
+		    int taskNum = int.Parse(task.Substring(task.IndexOf("☼ "),task.IndexOf(".")));
 		    
 		    var newTask = new Task(task, taskNum);
 		    tree.addTask(newTask);
 	    }
 
 	    return tree;
+    }
+
+    public static int getNumOfTasks()
+    {
+	    StreamReader sr = new StreamReader("tasks.txt");
+	    
+	    return sr.ReadToEnd().Length;
     }
 
 }

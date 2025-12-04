@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace TwoDoTEST;
 
@@ -14,6 +15,11 @@ public class TaskTree
     public void deleteTask(Task? task)
     {
         tasksSet.Remove(task);
+    }
+
+    public int getTaskCount()
+    {
+        return tasksSet.Count;
     }
     
 }

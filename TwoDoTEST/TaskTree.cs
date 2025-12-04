@@ -4,10 +4,16 @@ namespace TwoDoTEST;
 
 public class TaskTree
 {
-    public SortedSet<Task> tasksSet { get; set; }
+    public SortedSet<Task>? tasksSet { get; set; }
 
-    public TaskTree()
+    public void addTask(Task? task)
     {
-        
+        tasksSet.Add(task);
     }
+
+    public void deleteTask(Task? task)
+    {
+        tasksSet.Remove(task);
+    }
+    
 }

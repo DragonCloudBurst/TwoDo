@@ -82,14 +82,29 @@ public static class Program
 
     public static TaskTree getTasks()
     {
-	    StreamReader sr = new StreamReader("tasks.txt");
-	    var tasksData = sr.ReadToEnd().Split('\n');
+	    StreamReader sr = new StreamReader("../../../tasks.txt");
+	    var tasksData = new List<String>();
+	    try
+	    {
+		    var stream = sr.ReadToEnd();
+
+		    foreach (String line in stream.Split('\n'))
+		    {
+			    tasksData.Add(line);
+		    }
+	    }
+	    catch (Exception e)
+	    {
+		    Console.WriteLine(e);
+		    throw;
+	    }
+	    
 
 	    TaskTree tree = new TaskTree();
 
 	    foreach (var task in tasksData)
 	    {
-		    int taskNum = int.Parse(task.Substring(task.IndexOf("☼ "),task.IndexOf(".")));
+		    int taskNum = int.Parse(task.Substring(0,task.IndexOf(".")));
 		    
 		    var newTask = new Task(task, taskNum);
 		    tree.addTask(newTask);

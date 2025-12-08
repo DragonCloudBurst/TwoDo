@@ -13,7 +13,7 @@ public static class Program
 
 		 string userChoice = Console.ReadLine();
 
-		 if (userChoice == "task")
+		 if (userChoice == "new")
 		 {
 			 AnsiConsole.MarkupLine("[fuchsia]Enter task text:[/]    ");
 
@@ -39,6 +39,10 @@ public static class Program
 			 int nextTaskNum = numOfTasks + 1;
 			 
 			 tasks.addTask(new Task(taskText, nextTaskNum));
+
+			 StreamWriter sw = new StreamWriter("../../../tasks.txt", append: true);
+			 sw.Write($"\n{tasks.getTaskCount()}. {taskText}");
+			 sw.Close();
 		 }
 		 else if (userChoice == "new")
 		 {
@@ -92,6 +96,8 @@ public static class Program
 		    {
 			    tasksData.Add(line);
 		    }
+		    
+		    
 	    }
 	    catch (Exception e)
 	    {
@@ -99,6 +105,7 @@ public static class Program
 		    throw;
 	    }
 	    
+	    sr.Close();
 
 	    TaskTree tree = new TaskTree();
 

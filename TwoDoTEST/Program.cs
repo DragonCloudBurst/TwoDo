@@ -87,8 +87,11 @@ public static class Program
 					 isJotTextValid = true;
 				 }
 			 }
+
+			 int numJots = getJotsPerTask(jotNum);
+			 string numJotsString = numJots.ToString();
 			 
-			 addJot(jotNum, jotText);
+			 addJot(jotNum, jotText, numJotsString);
 			 
 			 
 			 
@@ -157,12 +160,31 @@ public static class Program
 	    return File.ReadLines("../../../tasks.txt").Count();
     }
 
-    public static void addJot(string taskNumber, string jot)
+    public static void addJot(string taskNumber, string jot, string numJotPerTask)
     {
 	    StreamWriter sw = new StreamWriter("../../../jots.txt", append: true);
-	    sw.Write($"\n{taskNumber}. {jot}");
+	    sw.Write($"\n{taskNumber}.{numJotPerTask} {jot}");
 	    sw.Close();
 	    
+    }
+
+    public static int getJotsPerTask(string taskNumber)
+    {
+	    int numJotPerTask = 0;
+	    
+	    StreamReader sr = new StreamReader("../../../jots.txt");
+	    var stream = sr.ReadToEnd();
+	    sr.Close();
+
+	    foreach (String line in stream.Split('\n'))
+	    {
+		    if (line.Substring(0, line.IndexOf(".")) == taskNumber)
+		    {
+			    numJotPerTask++;
+		    }
+	    }
+	    
+	    return numJotPerTask;
     }
 
 }

@@ -53,11 +53,7 @@ public static class Program
 			 
 		 }
 
-		
-
     }
-    
-    
 
     public static void printStartMenu()
     {
@@ -73,11 +69,6 @@ public static class Program
 
     public static void printTasks(TaskTree treeTasks)
     {
-	   
-	    int numOfTasks = treeTasks.getTaskCount();
-
-	    //var tasksEnum = treeTasks.tasksSet.GetEnumerator();
-
 	    foreach (Task t in treeTasks.tasksSet)
 	    {
 		    AnsiConsole.MarkupLine($"[fuchsia]│[/]   [grey89]☼ {t.taskText}[/]");
@@ -96,7 +87,6 @@ public static class Program
 		    {
 			    tasksData.Add(line);
 		    }
-		    
 		    
 	    }
 	    catch (Exception e)
@@ -122,8 +112,6 @@ public static class Program
 
     public static int getNumOfTasks()
     {
-	    //StreamReader sr = new StreamReader("../../../tasks.txt");
-	    
 	    return File.ReadLines("../../../tasks.txt").Count();
     }
 

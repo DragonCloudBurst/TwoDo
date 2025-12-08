@@ -15,6 +15,7 @@ public class TaskTree
     public void addTask(Task? task)
     {
         tasksSet.Add(task);
+        tasksSet.Append(task);
     }
 
     public void deleteTask(Task? task)

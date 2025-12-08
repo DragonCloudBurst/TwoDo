@@ -49,4 +49,5 @@ public class Task : IComparable<Task>
 
 		return $"[fuchsia]│[/][grey89]☼ {leftSpaces}{this.taskText}[/]{rightSpaces}[fuchsia]│[/]";
 	}
+	
 }

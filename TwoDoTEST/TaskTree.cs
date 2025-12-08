@@ -7,6 +7,11 @@ public class TaskTree
 {
     public SortedSet<Task>? tasksSet { get; set; }
 
+    public TaskTree()
+    {
+        tasksSet = new SortedSet<Task>();    
+    }
+    
     public void addTask(Task? task)
     {
         tasksSet.Add(task);

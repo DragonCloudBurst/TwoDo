@@ -50,6 +50,47 @@ public static class Program
 		 }
 		 else if (userChoice == "jot")
 		 {
+			 AnsiConsole.MarkupLine("[fuchsia]Enter the task number to take notes on:[/]    ");
+			 
+			 bool isJotValid = false;
+			 string jotNum = "";
+			 
+			 while (!isJotValid)
+			 {
+				 jotNum = Console.ReadLine();
+
+				 if (string.IsNullOrEmpty(jotNum) || int.Parse(jotNum).GetType() != typeof(int)) 
+				 {
+					 isJotValid = false;
+				 }
+				 else
+				 {
+					 isJotValid = true;
+				 }
+			 }
+			 
+			 AnsiConsole.MarkupLine("[fuchsia]Enter the jot text:[/]    ");
+			 
+			 bool isJotTextValid = false;
+			 string jotText = "";
+			 
+			 while (!isJotTextValid)
+			 {
+				 jotText = Console.ReadLine();
+
+				 if (string.IsNullOrEmpty(jotText)) 
+				 {
+					 isJotTextValid = false;
+				 }
+				 else
+				 {
+					 isJotTextValid = true;
+				 }
+			 }
+			 
+			 addJot(jotNum, jotText);
+			 
+			 
 			 
 		 }
 
@@ -114,6 +155,14 @@ public static class Program
     public static int getNumOfTasks()
     {
 	    return File.ReadLines("../../../tasks.txt").Count();
+    }
+
+    public static void addJot(string taskNumber, string jot)
+    {
+	    StreamWriter sw = new StreamWriter("../../../jots.txt", append: true);
+	    sw.Write($"\n{taskNumber}. {jot}");
+	    sw.Close();
+	    
     }
 
 }

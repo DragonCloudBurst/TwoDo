@@ -44,9 +44,9 @@ public static class Program
 			 sw.Write($"\n{tasks.getTaskCount()}. {taskText}");
 			 sw.Close();
 		 }
-		 else if (userChoice == "new")
+		 else if (userChoice == "task")
 		 {
-			 
+			 printTasks(tasks);
 		 }
 		 else if (userChoice == "jot")
 		 {
@@ -73,14 +73,14 @@ public static class Program
 
     public static void printTasks(TaskTree treeTasks)
     {
+	   
 	    int numOfTasks = treeTasks.getTaskCount();
 
-	    var tasksEnum = treeTasks.tasksSet.GetEnumerator();
+	    //var tasksEnum = treeTasks.tasksSet.GetEnumerator();
 
-	    for (int i = 0; i < numOfTasks; i++)
+	    foreach (Task t in treeTasks.tasksSet)
 	    {
-		    AnsiConsole.MarkupLine($"[fuchsia]│[/]   [grey89]☼ {tasksEnum.Current.taskNum}. {tasksEnum.Current.taskText}[/]");
-		    tasksEnum.MoveNext();
+		    AnsiConsole.MarkupLine($"[fuchsia]│[/]   [grey89]☼ {t.taskText}[/]");
 	    }
     }
 

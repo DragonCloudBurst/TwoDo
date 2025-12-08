@@ -115,9 +115,9 @@ public static class Program
 
     public static int getNumOfTasks()
     {
-	    StreamReader sr = new StreamReader("tasks.txt");
+	    //StreamReader sr = new StreamReader("../../../tasks.txt");
 	    
-	    return sr.ReadToEnd().Length;
+	    return File.ReadLines("../../../tasks.txt").Count();
     }
 
 }

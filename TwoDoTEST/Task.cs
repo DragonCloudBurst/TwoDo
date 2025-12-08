@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Spectre.Console;
 
-public class Task
+public class Task : IComparable<Task>
 {
 	public string taskText { get; set; }
 	public int taskNum { get; set; }
@@ -15,6 +15,11 @@ public class Task
 		this.taskText = text;
 		this.taskNum = num;
 		this.taskNotes = null;
+	}
+
+	public int CompareTo(Task other)
+	{
+		return this.taskText.CompareTo(other.taskText);
 	}
 
 	public string displayText()

@@ -6,11 +6,17 @@ namespace TwoDoTEST;
 public class TaskTree : IEnumerable
 {
     public static SortedSet<Task>? tasksSet { get; set; }
-    public Task[] taskArray { get; set; } = tasksSet?.ToArray() ?? new Task[0];
+    public List<Task>? taskList { get; set; }
 
     public TaskTree()
     {
-        tasksSet = new SortedSet<Task>();    
+        tasksSet = new SortedSet<Task>(); 
+        taskList = new List<Task>();
+
+        foreach (Task task in tasksSet)
+        {
+            taskList.Add(task);
+        }
     }
     
     public void addTask(Task? task)
@@ -31,7 +37,7 @@ public class TaskTree : IEnumerable
     
     public TaskEnum GetEnumerator()
     {
-        return new TaskEnum(taskArray);
+        return new TaskEnum(taskList.ToArray());
     }
     
     IEnumerator IEnumerable.GetEnumerator()

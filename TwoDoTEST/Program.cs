@@ -122,7 +122,7 @@ public static class Program
 				 }
 			 }
 			 
-			 AnsiConsole.MarkupLine("[fuchsia]Enter the jot text:[/]    ");
+			 AnsiConsole.MarkupLine("[fuchsia]Enter the subtask text:[/]    ");
 			 
 			 bool isSubTextValid = false;
 			 string subText = "";
@@ -142,6 +142,7 @@ public static class Program
 				 }
 			 }
 			 
+			 addSubTask(subNum, subText, (numSubTasks(subNum) + 1).ToString());
 			 
 		 }
 
@@ -164,7 +165,26 @@ public static class Program
     {
 	    foreach (Task t in treeTasks)
 	    {
-		    AnsiConsole.MarkupLine($"[fuchsia]│[/]   [grey89]☼ {t.taskText}[/]");
+		    bool doesHaveSubTask = doesTaskHaveSubTask(t.taskText);
+
+		    if (doesHaveSubTask)
+		    {
+			    
+			    AnsiConsole.MarkupLine($"[fuchsia]│[/]   [grey89]☼ {t.taskText}[/]");
+			    
+			    var subTasks = getSubTasksForTask(t.taskNum.ToString());
+
+			    foreach (var subtask in subTasks)
+			    {
+				    AnsiConsole.MarkupLine($"[fuchsia]│[/]       [grey89]☼ {subtask}[/]");
+			    }
+			    
+		    }
+		    else
+		    {
+			    AnsiConsole.MarkupLine($"[fuchsia]│[/]   [grey89]☼ {t.taskText}[/]");
+		    }
+		    
 	    }
     }
 
@@ -235,5 +255,69 @@ public static class Program
 	    return numJotPerTask;
     }
 
-}
+    public static List<string> getSubTasksForTask(string taskNumber)
+    {
+	    var subTasks = new List<string>();
+	    StreamReader sr = new StreamReader("../../../subtasks.txt");
+	    var stream = sr.ReadToEnd();
+	    sr.Close();
 
+	    foreach (String line in stream.Split('\n'))
+	    {
+		    if (line.Substring(line.IndexOf("."), line.IndexOf(")")) == taskNumber)
+		    {
+			    subTasks.Add(line);
+		    }
+	    }
+	    
+	    return subTasks;
+    }
+    
+    public static void addSubTask(string taskNumber, string subTask, string numSubPerTask)
+    {
+	    StreamWriter sw = new StreamWriter("../../../subtasks.txt", append: true);
+	    sw.Write($"\n{taskNumber}.{numSubPerTask}) {subTask}");
+	    sw.Close();
+	    
+    }
+
+    public static bool doesTaskHaveSubTask(string taskNumber)
+    {
+	    StreamReader sr = new StreamReader("../../../subtasks.txt");
+	    var stream = sr.ReadToEnd();
+	    sr.Close();
+
+	    foreach (String line in stream.Split('\n'))
+	    {
+		    if (line.Substring(0, line.IndexOf(".")) == taskNumber)
+		    {
+			    return true;
+		    }
+		    
+	    }
+	    
+	    return false;
+	    
+    }
+
+    public static int numSubTasks(string taskNumber)
+    {
+	    StreamReader sr = new StreamReader("../../../subtasks.txt");
+	    var stream = sr.ReadToEnd();
+	    sr.Close();
+
+	    int subTasksCount = 0;
+
+	    foreach (String line in stream.Split('\n'))
+	    {
+		    if (line.Substring(0, line.IndexOf(".")) == taskNumber)
+		    {
+			    subTasksCount++;
+		    }
+	    }
+
+	    return subTasksCount;
+	    
+    }
+
+}

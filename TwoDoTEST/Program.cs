@@ -40,7 +40,7 @@ public static class Program
 			 
 			 tasks.addTask(new Task(taskText, nextTaskNum));
 
-			 StreamWriter sw = new StreamWriter("../../../tasks.txt", append: true);
+			 StreamWriter sw = new StreamWriter("tasks.txt", append: true);
 			 sw.Write($"\n{tasks.getTaskCount()}. {taskText}");
 			 sw.Close();
 		 }
@@ -190,7 +190,7 @@ public static class Program
 
     public static TaskTree getTasks()
     {
-	    StreamReader sr = new StreamReader("../../../tasks.txt");
+	    StreamReader sr = new StreamReader("tasks.txt");
 	    var tasksData = new List<String>();
 	    try
 	    {
@@ -225,12 +225,12 @@ public static class Program
 
     public static int getNumOfTasks()
     {
-	    return File.ReadLines("../../../tasks.txt").Count();
+	    return File.ReadLines("tasks.txt").Count();
     }
 
     public static void addJot(string taskNumber, string jot, string numJotPerTask)
     {
-	    StreamWriter sw = new StreamWriter("../../../jots.txt", append: true);
+	    StreamWriter sw = new StreamWriter("jots.txt", append: true);
 	    sw.Write($"\n{taskNumber}.{numJotPerTask} {jot}");
 	    sw.Close();
 	    
@@ -240,7 +240,7 @@ public static class Program
     {
 	    int numJotPerTask = 0;
 	    
-	    StreamReader sr = new StreamReader("../../../jots.txt");
+	    StreamReader sr = new StreamReader("jots.txt");
 	    var stream = sr.ReadToEnd();
 	    sr.Close();
 
@@ -258,7 +258,7 @@ public static class Program
     public static List<string> getSubTasksForTask(string taskNumber)
     {
 	    var subTasks = new List<string>();
-	    StreamReader sr = new StreamReader("../../../subtasks.txt");
+	    StreamReader sr = new StreamReader("subtasks.txt");
 	    var stream = sr.ReadToEnd();
 	    sr.Close();
 
@@ -275,7 +275,7 @@ public static class Program
     
     public static void addSubTask(string taskNumber, string subTask, string numSubPerTask)
     {
-	    StreamWriter sw = new StreamWriter("../../../subtasks.txt", append: true);
+	    StreamWriter sw = new StreamWriter("subtasks.txt", append: true);
 	    sw.Write($"\n{taskNumber}.{numSubPerTask}) {subTask}");
 	    sw.Close();
 	    
@@ -283,7 +283,7 @@ public static class Program
 
     public static bool doesTaskHaveSubTask(string taskNumber)
     {
-	    StreamReader sr = new StreamReader("../../../subtasks.txt");
+	    StreamReader sr = new StreamReader("subtasks.txt");
 	    var stream = sr.ReadToEnd();
 	    sr.Close();
 
@@ -302,7 +302,7 @@ public static class Program
 
     public static int numSubTasks(string taskNumber)
     {
-	    StreamReader sr = new StreamReader("../../../subtasks.txt");
+	    StreamReader sr = new StreamReader("subtasks.txt");
 	    var stream = sr.ReadToEnd();
 	    sr.Close();
 

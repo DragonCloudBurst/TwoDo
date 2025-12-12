@@ -93,6 +93,54 @@ public static class Program
 			 
 			 addJot(jotNum, jotText, numJotsString);
 			 
+		 }
+		 else if (userChoice == "sub")
+		 {
+			 AnsiConsole.MarkupLine("[fuchsia]Enter the task number to add a subtask to:[/]    ");
+			 
+			 bool isSubValid = false;
+			 string subNum = "";
+			 
+			 while (!isSubValid)
+			 {
+				 subNum = Console.ReadLine();
+				 int taskCounter = tasks.getTaskCount();
+				 var tasksForTaskNums = new List<Task>();
+				 
+				 foreach (Task task in tasks)
+				 {
+					 tasksForTaskNums.Add(task);
+				 }
+
+				 if (string.IsNullOrEmpty(subNum) || int.Parse(subNum).GetType() != typeof(int) ) 
+				 {
+					 isSubValid = false;
+				 }
+				 else
+				 {
+					 isSubValid = true;
+				 }
+			 }
+			 
+			 AnsiConsole.MarkupLine("[fuchsia]Enter the jot text:[/]    ");
+			 
+			 bool isSubTextValid = false;
+			 string subText = "";
+			 
+			 while (!isSubTextValid)
+			 {
+				 subText = Console.ReadLine();
+
+				 if (string.IsNullOrEmpty(subText)) 
+				 {
+					 isSubTextValid = false;
+					 AnsiConsole.MarkupLine("[fuchsia]Please enter valid text:[/]    ");
+				 }
+				 else
+				 {
+					 isSubTextValid = true;
+				 }
+			 }
 			 
 			 
 		 }
@@ -114,7 +162,7 @@ public static class Program
 
     public static void printTasks(TaskTree treeTasks)
     {
-	    foreach (Task t in treeTasks.tasksSet)
+	    foreach (Task t in treeTasks)
 	    {
 		    AnsiConsole.MarkupLine($"[fuchsia]│[/]   [grey89]☼ {t.taskText}[/]");
 	    }

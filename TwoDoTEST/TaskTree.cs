@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace TwoDoTEST;
 
-public class TaskTree
+public class TaskTree : IEnumerable
 {
-    public SortedSet<Task>? tasksSet { get; set; }
+    public static SortedSet<Task>? tasksSet { get; set; }
+    public Task[] taskArray { get; set; } = tasksSet?.ToArray() ?? new Task[0];
 
     public TaskTree()
     {
@@ -26,6 +27,16 @@ public class TaskTree
     public int getTaskCount()
     {
         return tasksSet.Count;
+    }
+    
+    public TaskEnum GetEnumerator()
+    {
+        return new TaskEnum(taskArray);
+    }
+    
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
     
 }
